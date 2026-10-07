@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space School: NASA Hardware & Planetary Heritage</title>
+  <meta name="description" content="Explore NASA's historic hardware left on the Moon and Mars since the 1960s. Educational scrollytelling simulation guided by cartoon scientist Mr. Siuu.">
+  <meta name="keywords" content="NASA, Space Apps, Moon, Mars, Apollo, Curiosity, Perseverance, Space School, Planetary Heritage, Science Education">
+  <meta name="theme-color" content="#FFF9F2">
+
+  <!-- Favicon Icon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient background glow layers -->
+  <div class="bg-ambient-layer" aria-hidden="true">
+    <div class="ambient-dust-blob blob-1"></div>
+    <div class="ambient-dust-blob blob-2"></div>
+    <div class="ambient-dust-blob blob-3"></div>
+  </div>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-wrapper" id="nav-link-home" role="button" tabindex="0" title="Return to Launchpad">
+        <div class="brand-icon-satellite">🚀</div>
+        <div class="brand-title-group">
+          <h1>SPACE SCHOOL <span class="brand-badge">NASA HERITAGE</span></h1>
+          <p class="brand-tagline">Historic Hardware on Moon & Mars (1960s – Present)</p>
+        </div>
+      </div>
+
+      <nav class="nav-links-row" aria-label="Main Navigation">
+        <button class="nav-btn" id="nav-link-moon">🌙 Moon Missions</button>
+        <button class="nav-btn" id="nav-link-mars">🔴 Mars Missions</button>
+        <button class="nav-btn" id="nav-link-logbook">📋 Flight Logbook</button>
+        <button class="nav-btn" id="nav-link-quiz">🏆 Heritage Quiz</button>
+      </nav>
+
+      <div class="header-action-group">
+        <button class="sound-toggle-btn" id="header-audio-btn" aria-label="Toggle sound effects">
+          <span class="audio-eq-wave" aria-hidden="true">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </span>
+          <span class="audio-btn-label">Sound: ON</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Stage Area -->
+  <main id="app-main-content">
+
+    <!-- ========================================================
+         STAGE 1: HOME PAGE (Clean & Inviting Launchpad)
+         ======================================================== -->
+    <section id="stage-home" class="stage-view">
+      
+      <!-- Hero Intro Banner -->
+      <div class="home-hero-section">
+        <div class="hero-pill-badge">
+          <span>✨ NASA Space Apps Challenge Edition</span>
+          <span>•</span>
+          <span>Educational Simulation</span>
+        </div>
+
+        <h2 class="hero-main-title">
+          Explore NASA's Historic Hardware<br>
+          <span class="gradient-text">Across the Solar System</span>
+        </h2>
+
+        <p class="hero-subtitle">
+          Since the 1960s, NASA has left rovers, orbiters, laser mirrors, and scientific labs on the Moon and Mars. Step aboard our time-traveling flight simulator to uncover the science they made possible!
+        </p>
+
+        <!-- Centerpiece: Mr. Siuu Hero Launchpad Guide -->
+        <div class="centerpiece-stage-container">
+          <!-- Animated Mr. Siuu SVG container (Enlarged) -->
+          <div class="siuu-character-box" id="siuu-home-centerpiece" role="button" tabindex="0" title="Click Mr. Siuu to pause or replay his voice narration!" aria-label="Mr. Siuu, friendly flight director. Click to toggle voice narration.">
+            <!-- Populated via js/siuu.js -->
+          </div>
+
+          <!-- Interactive Voice Status Pill (Controls Autoplay Audio Narration) -->
+          <button class="siuu-audio-status-pill glass-panel" id="home-siuu-listen-btn" aria-label="Toggle Mr. Siuu's audio description" title="Click to pause or replay Mr. Siuu's voice">
+            <span class="siuu-voice-waves" id="home-voice-waves" aria-hidden="true">
+              <span class="v-bar"></span>
+              <span class="v-bar"></span>
+              <span class="v-bar"></span>
+              <span class="v-bar"></span>
+            </span>
+            <span class="siuu-audio-status-text" id="home-siuu-status-label">🔊 Mr. Siuu Speaking • Click to Pause</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Destination Selector Cards -->
+      <div class="destination-section-heading">
+        <h2>Choose Your Destination</h2>
+        <p style="color: var(--indigo-muted); font-size: 0.95rem; margin-top: 0.25rem;">Select Moon or Mars to access the 1960s–Present mission timeline</p>
+      </div>
+
+      <div class="destination-cards-grid">
+        <!-- 🌙 Destination 1: MOON -->
+        <div class="dest-card moon-card glass-panel" id="dest-card-moon" role="button" tabindex="0">
+          <div class="dest-card-header">
+            <div class="dest-avatar-sphere">🌙</div>
+            <span class="dest-mission-count-chip">11 Historic Missions</span>
+          </div>
+          <div class="dest-card-content">
+            <h3>Moon Exploration</h3>
+            <p class="dest-card-desc">
+              Discover Ranger crash-cameras, Surveyor soft-landers, Apollo Lunar Modules & Electric Moon Buggies, and modern Artemis & Odysseus south pole probes!
+            </p>
+            <ul class="dest-card-highlights">
+              <li>📍 Distance: 384,400 km (3 days flight)</li>
+              <li>🚗 Hardware: 3 parked Lunar Rovers & ALSEP packages</li>
+              <li>🔬 Key Science: Proven water ice in polar craters & Moon origin</li>
+            </ul>
+          </div>
+          <button class="dest-cta-btn">
+            <span>Explore Lunar Heritage</span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <!-- 🔴 Destination 2: MARS -->
+        <div class="dest-card mars-card glass-panel" id="dest-card-mars" role="button" tabindex="0">
+          <div class="dest-card-header">
+            <div class="dest-avatar-sphere">🔴</div>
+            <span class="dest-mission-count-chip">14 Historic Missions</span>
+          </div>
+          <div class="dest-card-content">
+            <h3>Mars Exploration</h3>
+            <p class="dest-card-desc">
+              From Mariner 4's first crater photos in 1965 to Curiosity's laser spectrometer and Ingenuity's 72 historic helicopter flights over red dunes!
+            </p>
+            <ul class="dest-card-highlights">
+              <li>📍 Distance: 225 Million km (7-8 months flight)</li>
+              <li>🚗 Hardware: 6 rovers, 1 helicopter, arctic trench scoops</li>
+              <li>🔬 Key Science: Ancient rivers, lakes & organic building blocks</li>
+            </ul>
+          </div>
+          <button class="dest-cta-btn">
+            <span>Explore Martian Heritage</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Planetary Heritage 101 Highlights -->
+      <div class="destination-section-heading" style="margin-top: 2rem;">
+        <h2>Why Does NASA Leave Hardware on Other Worlds?</h2>
+        <p style="color: var(--indigo-muted); font-size: 0.95rem; margin-top: 0.25rem;">Three vital scientific and engineering reasons</p>
+      </div>
+
+      <div class="heritage-overview-grid">
+        <div class="info-stat-card glass-panel">
+          <div class="info-stat-icon">📡</div>
+          <h4>Long-Term Science Experiments</h4>
+          <p>Instruments like the Apollo 11 Laser Retroreflectors and InSight seismometers continued collecting science data for years after launch.</p>
+        </div>
+
+        <div class="info-stat-card glass-panel">
+          <div class="info-stat-icon">⚖️</div>
+          <h4>Rocket Fuel & Physics</h4>
+          <p>Lifting heavy descent stages and rovers off planetary surfaces requires immense fuel. Leaving them behind allows lightweight return capsules.</p>
+        </div>
+
+        <div class="info-stat-card glass-panel">
+          <div class="info-stat-icon">🏛️</div>
+          <h4>Planetary Heritage Sites</h4>
+          <p>These historic sites are preserved forever in space as eternal monuments to human curiosity, peaceful exploration, and technological ingenuity.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         STAGE 2: MISSION SELECTION TIMELINE (Moon or Mars)
+         ======================================================== -->
+    <section id="stage-timeline" class="stage-view hidden">
+      
+      <!-- Top Navigation & Destination Switcher -->
+      <div class="timeline-top-nav-bar">
+        <button class="back-pill-btn" id="back-to-home-btn">
+          <span>← Back to Launchpad</span>
+        </button>
+
+        <div class="destination-switcher-group">
+          <button class="dest-toggle-btn active" data-dest="Moon">🌙 Moon Missions</button>
+          <button class="dest-toggle-btn" data-dest="Mars">🔴 Mars Missions</button>
+        </div>
+      </div>
+
+      <!-- Destination Banner -->
+      <div class="timeline-hero-banner glass-panel">
+        <div class="banner-content-left">
+          <div class="banner-badge-row">
+            <span class="dest-planet-icon" id="timeline-destination-icon">🌙</span>
+            <h2 class="dest-banner-title" id="timeline-destination-title">Moon Planetary Heritage</h2>
+          </div>
+          <p class="dest-banner-subtitle" id="timeline-destination-subtitle">
+            Relive 1964–Present Lunar exploration missions, Apollo landers, rovers, and south-pole explorers!
+          </p>
+          <div class="banner-siuu-quote" id="timeline-siuu-quote">
+            Mr. Siuu: "The Moon has no wind or rain, so Apollo hardware remains preserved as if left yesterday!"
+          </div>
+        </div>
+
+        <div class="banner-count-pill" id="timeline-count-badge">
+          11 Historic Missions
+        </div>
+      </div>
+
+      <!-- Timeline Filter & Search Controls -->
+      <div class="timeline-filter-bar glass-panel">
+        <div class="filter-row-primary">
+          <!-- Search box -->
+          <div class="search-box-wrapper">
+            <span class="search-icon-svg">🔍</span>
+            <input type="text" id="mission-search-input" class="search-input-field" placeholder="Search mission name, equipment (e.g. Laser, Camera, Rover)..." aria-label="Search missions">
+          </div>
+
+          <!-- Decade filter chips -->
+          <div class="filter-chip-group">
+            <span class="filter-chip-label">Decade:</span>
+            <button class="filter-chip filter-decade-chip active" data-value="all">All</button>
+            <button class="filter-chip filter-decade-chip" data-value="1960s">1960s</button>
+            <button class="filter-chip filter-decade-chip" data-value="1970s">1970s</button>
+            <button class="filter-chip filter-decade-chip" data-value="1990s">1990s</button>
+            <button class="filter-chip filter-decade-chip" data-value="2000s">2000s</button>
+            <button class="filter-chip filter-decade-chip" data-value="2010s">2010s</button>
+            <button class="filter-chip filter-decade-chip" data-value="2020s">2020s</button>
+          </div>
+        </div>
+
+        <!-- Category filter chips -->
+        <div class="filter-chip-group" style="padding-top: 0.5rem; border-top: 1px dashed var(--sand-dark);">
+          <span class="filter-chip-label">Hardware Type:</span>
+          <button class="filter-chip filter-cat-chip active" data-value="all">All Hardware</button>
+          <button class="filter-chip filter-cat-chip" data-value="rover">🚗 Rovers & Mobility</button>
+          <button class="filter-chip filter-cat-chip" data-value="lander">🛸 Soft Landers</button>
+          <button class="filter-chip filter-cat-chip" data-value="orbiter">🛰️ Orbiters</button>
+          <button class="filter-chip filter-cat-chip" data-value="probe">🎯 Impact & Flyby Probes</button>
+        </div>
+      </div>
+
+      <!-- Scrollytelling Timeline Cards List -->
+      <div class="timeline-stream-container" id="timeline-missions-list">
+        <!-- Rendered dynamically by js/timeline.js -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       STAGE 3: CINEMATIC ROCKET FLIGHT SIMULATION OVERLAY
+       ======================================================== -->
+  <div id="flight-sim-overlay" class="flight-sim-overlay" role="dialog" aria-modal="true" aria-label="Flight Simulation">
+    
+    <!-- In-Flight Heads-Up Display (HUD) -->
+    <header class="flight-hud-header">
+      <div class="hud-mission-info">
+        <span class="hud-badge-tag" id="hud-target-body">🌙 Moon</span>
+        <div>
+          <h3 class="hud-mission-title" id="hud-mission-name">Apollo 11</h3>
+          <span style="font-size: 0.75rem; color: #CBD5E1;" id="hud-launch-year">1969 • Crewed Lander</span>
+        </div>
+      </div>
+
+      <div class="hud-telemetry-cluster">
+        <div class="telemetry-item">
+          <span class="telemetry-label">Flight Status</span>
+          <span class="telemetry-value" id="hud-stage-status">T-Minus 3 Seconds</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Altitude</span>
+          <span class="telemetry-value" id="hud-telemetry-altitude">0 km</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Velocity</span>
+          <span class="telemetry-value" id="hud-telemetry-speed">0 km/h</span>
+        </div>
+      </div>
+
+      <div class="hud-actions-cluster">
+        <button class="hud-close-btn" onclick="flightSimulator.closeFlightSimulation()">
+          ✕ Exit Flight
+        </button>
+      </div>
+    </header>
+
+    <!-- Parallax Ascent Scene Container -->
+    <div id="flight-parallax-scene" class="flight-parallax-scene">
+      
+      <!-- Layer 1: Ground Launchpad Scenery -->
+      <div id="layer-ground" class="parallax-layer">
+        <svg class="ground-scenery-svg" viewBox="0 0 1440 380" preserveAspectRatio="none">
+          <!-- Soft green grassy terrain -->
+          <path d="M0,280 C320,240 720,310 1440,260 L1440,380 L0,380 Z" fill="#6EE7B7"/>
+          <path d="M0,310 C480,270 960,340 1440,300 L1440,380 L0,380 Z" fill="#34D399"/>
+          
+          <!-- Launchpad concrete platform -->
+          <rect x="620" y="270" width="200" height="90" rx="10" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="3"/>
+          <rect x="650" y="260" width="140" height="15" rx="4" fill="#94A3B8"/>
+
+          <!-- Apollo-style Red Service Gantry Tower -->
+          <g transform="translate(540, 70)">
+            <rect x="0" y="0" width="30" height="210" fill="#EF4444" stroke="#DC2626" stroke-width="2"/>
+            <line x1="0" y1="30" x2="30" y2="60" stroke="#FFF" stroke-width="2"/>
+            <line x1="30" y1="30" x2="0" y2="60" stroke="#FFF" stroke-width="2"/>
+            <line x1="0" y1="90" x2="30" y2="120" stroke="#FFF" stroke-width="2"/>
+            <line x1="30" y1="90" x2="0" y2="120" stroke="#FFF" stroke-width="2"/>
+            <line x1="0" y1="150" x2="30" y2="180" stroke="#FFF" stroke-width="2"/>
+            <line x1="30" y1="150" x2="0" y2="180" stroke="#FFF" stroke-width="2"/>
+            <!-- Swing arm -->
+            <rect x="30" y="40" width="55" height="10" fill="#991B1B"/>
+          </g>
+
+          <!-- Florida Cape Canaveral Palm trees -->
+          <g transform="translate(240, 230)">
+            <path d="M20,90 Q25,30 22,0" stroke="#78350F" stroke-width="6" fill="none"/>
+            <circle cx="15" cy="0" r="16" fill="#059669"/>
+            <circle cx="28" cy="0" r="14" fill="#10B981"/>
+          </g>
+          <g transform="translate(1180, 240)">
+            <path d="M15,80 Q20,30 18,0" stroke="#78350F" stroke-width="6" fill="none"/>
+            <circle cx="12" cy="0" r="16" fill="#059669"/>
+            <circle cx="25" cy="0" r="14" fill="#10B981"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Layer 2: Stratosphere & Soft Rolling Clouds -->
+      <div id="layer-clouds" class="parallax-layer">
+        <svg viewBox="0 0 1440 900" style="width:100%; height:100%;">
+          <!-- Soft Clouds -->
+          <path class="fluffy-cloud-svg" d="M120,400 Q180,320 280,350 Q360,300 450,360 Q520,340 580,410 Q620,480 500,520 L160,520 Z" opacity="0.75"/>
+          <path class="fluffy-cloud-svg" d="M850,250 Q920,180 1020,210 Q1100,160 1200,220 Q1270,190 1340,260 Q1380,340 1260,370 L890,370 Z" opacity="0.65"/>
+        </svg>
+      </div>
+
+      <!-- Layer 3: Deep Outer Space & Starfield Dust -->
+      <div id="layer-space" class="parallax-layer">
+        <div class="starfield-dust"></div>
+        <!-- Distant Earth receding -->
+        <svg viewBox="0 0 1440 900" style="width:100%; height:100%; position:absolute;">
+          <g transform="translate(200, 500)">
+            <circle cx="60" cy="60" r="45" fill="#3B82F6"/>
+            <!-- White swirling cloud bands on Earth -->
+            <path d="M30,50 Q60,35 90,55" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8"/>
+            <path d="M25,75 Q60,65 95,80" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.8"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Layer 4: Orbit Arrival at Target Planet -->
+      <div id="layer-orbit" class="parallax-layer">
+        <div class="target-celestial-body moon" id="flight-target-body"></div>
+      </div>
+
+      <!-- Centerpiece Animated Flight Rocket -->
+      <div class="flight-rocket-centerpiece" id="sim-flight-rocket">
+        <svg class="rocket-svg-graphic" viewBox="0 0 140 280">
+          <defs>
+            <linearGradient id="rocket-body-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="60%" stop-color="#FFF9F2"/>
+              <stop offset="100%" stop-color="#E2D4C0"/>
+            </linearGradient>
+            <linearGradient id="flame-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="25%" stop-color="#FBBF24"/>
+              <stop offset="70%" stop-color="#FF5A36"/>
+              <stop offset="100%" stop-color="rgba(255, 90, 54, 0)"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Rocket Fins -->
+          <polygon points="25,180 5,235 40,225" fill="#FF5A36"/>
+          <polygon points="115,180 135,235 100,225" fill="#FF5A36"/>
+
+          <!-- Rocket Main Fuselage -->
+          <path d="M40,225 L40,90 Q70,10 100,90 L100,225 Z" fill="url(#rocket-body-grad)" stroke="#1E1B2E" stroke-width="3"/>
+
+          <!-- Nose Cone Nose Tip -->
+          <path d="M55,50 Q70,10 85,50 Z" fill="#FF5A36"/>
+
+          <!-- NASA Red Vintage Stripe -->
+          <rect x="40" y="110" width="60" height="12" fill="#FF5A36"/>
+
+          <!-- Porthole Window with Glass Reflection -->
+          <circle cx="70" cy="90" r="14" fill="#1E1B2E" stroke="#FF8C42" stroke-width="2.5"/>
+          <circle cx="70" cy="90" r="11" fill="#38BDF8"/>
+          <path d="M64,84 Q74,80 75,94" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.7"/>
+
+          <!-- Engine Thruster Nozzle -->
+          <polygon points="50,225 90,225 95,242 45,242" fill="#52525B"/>
+
+          <!-- Animated Exhaust Flames & Particles -->
+          <g id="rocket-exhaust-flames" class="rocket-exhaust-flames">
+            <polygon class="flame-particle" points="48,242 92,242 70,320" fill="url(#flame-grad)"/>
+            <polygon class="flame-particle" points="56,242 84,242 70,290" fill="#FFFFFF" opacity="0.9"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- T-Minus 3 Countdown Box -->
+      <div class="flight-countdown-display" id="flight-countdown-display">
+        <div class="countdown-box">
+          <div class="countdown-label">Launch Sequence</div>
+          <div class="countdown-number" id="countdown-number">3</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================
+         MISSION COCKPIT & HARDWARE INSPECTOR (AFTER ARRIVAL)
+         ======================================================== -->
+    <div id="mission-cockpit-view" class="mission-cockpit-view">
+      <div class="cockpit-layout-grid">
+        
+        <!-- Left Column: Authentic NASA Archival Photo Integration -->
+        <div class="cockpit-nasa-frame glass-panel">
+          <div class="archival-badge-ribbon">
+            <span class="nasa-authentic-seal">
+              <span>★</span> AUTHENTIC NASA ARCHIVE
+            </span>
+            <span class="nasa-id-code" id="cockpit-nasa-id">NASA ID: PIA02975</span>
+          </div>
+
+          <div class="nasa-photo-container">
+            <img id="cockpit-nasa-img" src="" alt="Authentic NASA Spacecraft Photography" class="nasa-full-photo">
+          </div>
+
+          <p class="nasa-photo-caption" id="cockpit-nasa-caption">
+            Authentic NASA archival photography of the mission spacecraft.
+          </p>
+
+          <a href="#" target="_blank" rel="noopener noreferrer" class="nasa-source-link" id="cockpit-nasa-full-link">
+            <span>🔗 View Full-Res Archival Asset on NASA.gov</span>
+          </a>
+        </div>
+
+        <!-- Right Column: Mr. Siuu's Narration & Hardware Deep-Dive -->
+        <div class="cockpit-story-column">
+          
+          <div class="cockpit-mission-header">
+            <div class="cockpit-badge-row">
+              <span class="cockpit-body-chip" id="cockpit-body-chip">🌙 Moon Explorer</span>
+              <span class="cockpit-status-tag" id="cockpit-status-pill">Hardware Remains on Surface</span>
+            </div>
+            <h2 class="cockpit-title" id="cockpit-mission-title">Apollo 11</h2>
+            <p class="cockpit-year-type" id="cockpit-mission-year">1969 • Crewed Lander & Hardware</p>
+          </div>
+
+          <!-- Mr. Siuu Audio Narrator Panel (Enlarged mascot, no description box, dedicated audio start button) -->
+          <div class="cockpit-siuu-speech-panel glass-panel">
+            <div class="cockpit-siuu-avatar-slot" id="cockpit-siuu-avatar-slot">
+              <!-- Rendered via js/siuu.js (Enlarged) -->
+            </div>
+            <div class="cockpit-siuu-text-wrapper">
+              <div class="cockpit-siuu-label">Mr. Siuu Audio Guide</div>
+              <p class="cockpit-siuu-subtitle">Flight Director & Science Narrator</p>
+              <button class="cockpit-listen-btn cockpit-audio-start-btn" id="cockpit-listen-btn" aria-label="Start Mr. Siuu's audio narration">
+                <span class="audio-btn-icon" id="cockpit-audio-icon">▶</span>
+                <span class="audio-btn-label" id="cockpit-audio-label">Start Audio Narration</span>
+                <span class="audio-wave-anim" id="cockpit-audio-waves" style="display: none;">
+                  <span></span><span></span><span></span><span></span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Hardware Breakdown List -->
+          <div class="hardware-breakdown-section">
+            <h3>🛠️ Onboard Science Hardware & Heritage Artifacts</h3>
+            <div class="cockpit-hardware-breakdown" id="cockpit-hardware-breakdown">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Mission Mastery Quiz (4 Questions per mission) -->
+          <div class="cockpit-mission-quiz-section glass-panel" id="cockpit-mission-quiz-section">
+            <div class="cockpit-quiz-header">
+              <div class="quiz-badge-row">
+                <span class="quiz-section-badge">🎯 Mission Knowledge Quiz</span>
+                <span class="quiz-score-pill" id="cockpit-quiz-score-pill">Score: 0 / 4</span>
+              </div>
+              <h3 class="cockpit-quiz-title" id="cockpit-quiz-title">Mission 4-Question Challenge</h3>
+              <div class="cockpit-quiz-steps" id="cockpit-quiz-steps">
+                <span class="quiz-step-dot active" data-q="0">Q1</span>
+                <span class="quiz-step-dot" data-q="1">Q2</span>
+                <span class="quiz-step-dot" data-q="2">Q3</span>
+                <span class="quiz-step-dot" data-q="3">Q4</span>
+              </div>
+            </div>
+
+            <div class="cockpit-quiz-body" id="cockpit-quiz-body">
+              <!-- Rendered dynamically for each mission -->
+            </div>
+          </div>
+
+          <!-- Bottom Actions Bar -->
+          <div class="cockpit-footer-actions">
+            <button class="collect-stamp-btn" id="cockpit-collect-stamp-btn" onclick="flightSimulator.collectActiveStamp()">
+              ⭐ Collect Heritage Stamp in Logbook
+            </button>
+
+            <div class="nav-mission-arrows">
+              <button class="arrow-nav-btn" onclick="flightSimulator.navigateMission(-1)">
+                ◀ Prev Mission
+              </button>
+              <button class="arrow-nav-btn" onclick="flightSimulator.navigateMission(1)">
+                Next Mission ▶
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================================
+       MODAL 1: STUDENT FLIGHT LOGBOOK & PASSPORT
+       ======================================================== -->
+  <div id="logbook-modal" class="app-modal-backdrop" role="dialog" aria-modal="true" aria-label="Flight Logbook">
+    <div class="modal-content-card glass-panel">
+      <button class="modal-close-icon" onclick="quizAndLogbook.closeLogbookModal()" aria-label="Close Logbook">✕</button>
+
+      <div class="modal-header-block">
+        <div class="modal-header-icon">📋</div>
+        <h3>My Planetary Flight Logbook</h3>
+        <p>Your passport of NASA hardware artifacts visited across the Solar System</p>
+      </div>
+
+      <!-- Exploration Progress -->
+      <div class="logbook-progress-wrapper">
+        <div class="logbook-progress-labels">
+          <span>Heritage Stamps Collected</span>
+          <span><strong id="logbook-stamp-count">0</strong> / <span id="logbook-stamp-total">25</span> Missions</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="logbook-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Stamps Passport Grid -->
+      <div class="logbook-stamps-grid" id="logbook-stamps-grid">
+        <!-- Rendered via js/quiz-logbook.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 2: MR. SIUU'S SPACE SCHOOL QUIZ
+       ======================================================== -->
+  <div id="quiz-modal" class="app-modal-backdrop" role="dialog" aria-modal="true" aria-label="Space School Quiz">
+    <div class="modal-content-card glass-panel" id="quiz-card-content">
+      <button class="modal-close-icon" onclick="quizAndLogbook.closeQuizModal()" aria-label="Close Quiz">✕</button>
+
+      <div class="modal-header-block">
+        <div class="modal-header-icon">🏆</div>
+        <h3>Junior Planetary Archivist Challenge</h3>
+        <p>Test your NASA hardware knowledge with Mr. Siuu!</p>
+      </div>
+
+      <div class="quiz-progress-bar">
+        <span>Question <span id="quiz-question-num">1</span> of <span id="quiz-question-total">5</span></span>
+      </div>
+
+      <div class="quiz-question-box">
+        <h4 class="quiz-question-text" id="quiz-question-text">
+          What did Ranger 7 transmit before crashing onto the Moon?
+        </h4>
+      </div>
+
+      <div class="quiz-options-container" id="quiz-options-container">
+        <!-- Rendered via js/quiz-logbook.js -->
+      </div>
+
+      <div id="quiz-feedback-box" class="quiz-feedback-box hidden"></div>
+
+      <div class="quiz-action-row">
+        <button class="pill-btn primary" id="quiz-next-btn" style="display: none;" onclick="quizAndLogbook.nextQuestion()">
+          Next Question →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/siuu.js"></script>
+  <script src="js/timeline.js"></script>
+  <script src="js/flight-sim.js"></script>
+  <script src="js/quiz-logbook.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
